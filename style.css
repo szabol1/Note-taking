@@ -1,0 +1,43 @@
+.forms{
+    display: flex;
+    margin:30px;
+    font-family: "Franklin Gothic Medium";
+    color: #407dd7;
+    justify-content:center;
+}
+form{
+    display:block;
+    background-color: aliceblue;
+    border-radius:25px;
+    padding:50px;
+}
+body{
+    background-image: url("images/sean-thoman-MHOwm8dUNx0-unsplash.jpg");
+    background-size:cover;
+}
+.navigator{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    font-family: "Adobe Devanagari";
+    font-size: larger;
+    font-family: "Franklin Gothic Medium";
+    background-color: #eafffa;
+    padding-bottom: 10px;
+    padding-top:10px;
+}
+a{
+    color: #407dd7;
+}
+h1{
+    text-align:center;
+    letter-spacing: 7px;
+    font-size: 50px;
+    font-family: Calibri;
+    margin:0;
+    padding:20px;
+}
+label{
+    display:flex;
+    align-content: center;
+}

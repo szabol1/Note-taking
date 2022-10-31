@@ -44,7 +44,7 @@ class user{
 }
 
 let register = document.getElementById("registerForm");
-register.addEventListener('submit', addUser);
+register.addEventListener('registerSubmission', addUser);
 
 function addUser(e){
     e.preventDefault();
@@ -59,7 +59,7 @@ function addUser(e){
 
 }
 let log = document.getElementById("login");
-log.addEventListener("submit", login);
+log.addEventListener("loginSubmission", login);
 
 function login(e){
     e.preventDefault();
@@ -102,7 +102,7 @@ class notes{
     }
 }
 let note =document.getElementById("notes");
-note.addEventListener("submit", newNote);
+note.addEventListener("notesSubmission", newNote);
 
 function newNote(e){//does a user activate this?
     e.preventDefault();

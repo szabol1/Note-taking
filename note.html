@@ -7,18 +7,45 @@
         <title>Notes</title>
     </head>
     <body>
-        <h1 style="color: #407dd7; background-color: #eafffa;"> Take Notes Here!</h1>
-        <div class="navigator">
+        <h1 style="color: #407dd7;">NOTES</h1>
+        <div class="wrapper">
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="./images/kelly-sikkema-9OGNpJPVMZ8-unsplash.jpg" alt="profile_picture">
+
+                    <h3>Keep Track of Your Thoughts</h3><br>
+
+                    <li>
+                        <span class="icon "><i class="fas fa-home"></i></span>
+                        <a href="">Checklist</a>
+
+                    </li><br>
+                    <li>
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <a href="note.html">Note taking</a>
+                    </li><br>
+                    <li>
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <a href="register.html">Reminders</a>
+                    </li><br>
+                    <li>
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <a href="">Journals</a>
+                    </li><br>
+                </div>
+            </div>
+        <div class="navigator" style = "width: calc(100% - 200px); margin-left: 220px;text-align: center;">
             <a href="login.html">Login</a>
             <a href="note.html">Note taking</a>
             <a href="register.html">Register</a>
         </div>
         <div class="forms">
-            <form>
-            <textarea cols="100" name="notes" rows="50"> Write notes here... </textarea>
+            <form id = notes>
+            <textarea cols="100" id="writing" name="notes" rows="50"> Write notes here... </textarea>
             <br>
             <input type="submit" value="submit">
             </form>
         </div>
+    </div>
     </body>
 </html>

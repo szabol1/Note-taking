@@ -1,13 +1,9 @@
-class user{
+class User{
     constructor(id, fName, lName, uName, password){
         this.userId = id;
         this.firstName = fName;
         this.lastName = lName;
         this.username =uName;
-        this.password = password;
-    }
-    constructor(uName, password) {
-        this.username = uName;
         this.password = password;
     }
     getFirstName(){
@@ -44,29 +40,30 @@ class user{
 }
 
 let register = document.getElementById("registerForm");
-register.addEventListener('registerSubmission', addUser);
+
+if(register) register.addEventListener('submit', addUser);
 
 function addUser(e){
     e.preventDefault();
 
     const first = document.getElementById("name").value;
     const last = document.getElementById("last").value;
-    const user = document.getElementById("user").value;
+    const usern = document.getElementById("user").value;
     const password = document.getElementById("pass").value;
 
-    const newUser = new user(1, first, last, user, password);
-    console.log(newUser);
+    const newUser = new User(1, first, last, usern, password);
+    console.log(newUser.getUserId() + ", " + newUser.getFirstName()+ ", " + newUser.getLastName() + ", " + newUser.getUserName() + ", " + newUser.getPassword());
 
 }
-let log = document.getElementById("login");
-log.addEventListener("loginSubmission", login);
+let log = document.getElementById("loginForm");
+if(log) log.addEventListener("submit", login);
 
 function login(e){
     e.preventDefault();
     const first = document.getElementById("Username").value;
     const second = document.getElementById("Password").value;
     const user = new user(first, second);
-    console.log(user);
+    console.log(user.getUserName() + "was logged in");
     //check if(user == anything in database?)
 }
 class notes{
@@ -102,7 +99,7 @@ class notes{
     }
 }
 let note =document.getElementById("notes");
-note.addEventListener("notesSubmission", newNote);
+if(note) note.addEventListener("submit", newNote);
 
 function newNote(e){//does a user activate this?
     e.preventDefault();

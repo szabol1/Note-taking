@@ -62,9 +62,10 @@ function login(e){
     e.preventDefault();
     const first = document.getElementById("Username").value;
     const second = document.getElementById("Password").value;
-    const user = new user(first, second);
+    //check if(user and password == anything in database?) cant create second constructor for just log in..not sure what to do here since we dont have values assigned to userIDs yet
+    let user = new User(1,"firstName", "LastName", first, second);
     console.log(user.getUserName() + "was logged in");
-    //check if(user == anything in database?)
+
 }
 class notes{
     constructor(noteId,userid, postDate, contents){
@@ -77,7 +78,7 @@ class notes{
         return `${this.noteId}`;
     }
     getUserId(){
-        return `${this.userId};`
+        return `${this.userId}`;
     }
     getPostDate(){
         return `${this.postDate}`;
@@ -98,16 +99,18 @@ class notes{
         return`${this.contents}`;
     }
 }
-let note =document.getElementById("notes");
-if(note) note.addEventListener("submit", newNote);
+let noteDoc =document.getElementById("notesForm");
+if(noteDoc) noteDoc.addEventListener("submit", newNote);
 
 function newNote(e){//does a user activate this?
     e.preventDefault();
 
-    const note = document.getElementById("writing");
-    var date = new Date();
-    var todaysDate = String(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
-
-    const newNte = new notes(Math.random(),this.getUserId(), todaysDate, note);
+    const note = document.getElementById("writing").value;
+    let date = new Date();
+    let todaysDate = String(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
+    let nte = new notes(1, 1, todaysDate, note);
+    nte.setNoteId(1);
+    //again no assignments for userIDs or notes yet so not sure what to put in for those besides maybe Math.random()
+;    console.log(nte.getNoteId() + " " + nte.getUserId(), " " + nte.getPostDate() + " " + nte.getContents());
 
 }

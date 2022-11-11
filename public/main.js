@@ -68,9 +68,9 @@ function login(e){
 
 }
 class notes{
-    constructor(noteId,userid, postDate, contents){
+    constructor(noteId,User, postDate, contents){
         this.noteId = noteId;
-        this.userId = userid;
+        this.userId = User;
         this.postDate = postDate;
         this.contents = contents;
     }
@@ -108,8 +108,9 @@ function newNote(e){//does a user activate this?
     const note = document.getElementById("writing").value;
     let date = new Date();
     let todaysDate = String(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
-    let nte = new notes(1, 1, todaysDate, note);
-    nte.setNoteId(1);
+    let postID = Math.floor((Math.random()*(100000000-1+1)+1));
+    let nte = new notes(postID, 1, todaysDate, note);
+
     //again no assignments for userIDs or notes yet so not sure what to put in for those besides maybe Math.random()
 ;    console.log(nte.getNoteId() + " " + nte.getUserId(), " " + nte.getPostDate() + " " + nte.getContents());
 

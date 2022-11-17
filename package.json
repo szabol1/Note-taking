@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "name": "notetaking",
+  "version": "1.0.0",
+  "description": "a web app to take notes",
+  "main": "main.js",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szabol1/Note-taking.git"
+  },
+  "keywords": [
+    "notes",
+    "notetaking"
+  ],
+  "author": "lauren szabo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szabol1/Note-taking/issues"
+  },
+  "homepage": "https://github.com/szabol1/Note-taking#readme"
+}

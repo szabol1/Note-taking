@@ -38,6 +38,9 @@ class User{
     }
 
 }
+function fetchData(){
+
+}
 
 let register = document.getElementById("registerForm");
 
@@ -55,6 +58,7 @@ function addUser(e){
     console.log(newUser.getUserId() + ", " + newUser.getFirstName()+ ", " + newUser.getLastName() + ", " + newUser.getUserName() + ", " + newUser.getPassword());
 
 }
+
 let log = document.getElementById("loginForm");
 if(log) log.addEventListener("submit", login);
 

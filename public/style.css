@@ -22,7 +22,7 @@ form{
     position: center;
 }
 body{
-    background-image: url("../images/sean-thoman-MHOwm8dUNx0-unsplash.jpg");
+    background-image: url("images/sean-thoman-MHOwm8dUNx0-unsplash.jpg");
     background-size:cover;
 }
 .navigator{
@@ -34,8 +34,7 @@ body{
     background-color: aliceblue;
     padding-bottom: 10px;
     padding-top:10px;
-    border-bottom-color: #b5b8d7;
-    border-bottom-style: solid;
+
     border-bottom-width: 5px;
 }
 .wrapper .sidebar{
@@ -46,8 +45,7 @@ body{
     width: 225px;
     height: 100%;
     padding: 20px 0;
-    border-right: solid;
-    border-right-color: #B5B8D7;
+
     display:flex;
 
 }
@@ -69,8 +67,7 @@ li a{
     margin: 10px;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .wrapper .sidebar .profile h3{
@@ -83,6 +80,7 @@ li a{
     color: #407dd7;
     width: 30px;
     display: inline-block;
+    justify-content: center;
 }
 a{
     color: #407dd7;
@@ -96,8 +94,7 @@ h1{
     font-weight: lighter;
     font-family: "Franklin Gothic Medium";
     padding-bottom:20px; padding-top: 20px;
-    border-bottom: #b5b8d7;
-    border-bottom-style: solid;
+
     background-color: rgba(255, 255, 255, 0.5);
 }
 label{

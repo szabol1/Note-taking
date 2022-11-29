@@ -1,6 +1,6 @@
 const express = require(`express`);
 const app = express();
-const userRoutes = require("./Server/routes/user");
+const userRoutes = require("./Server/routes/user");//connects to
 const {json} = require("express");
 
 app.use(function(req, res, next){
@@ -12,9 +12,9 @@ app.use(function(req, res, next){
 app.use(express,json());
 app.use("/user", userRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;//sets port
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));//listens to and starts port connection
 
 
 

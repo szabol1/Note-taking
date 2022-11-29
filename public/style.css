@@ -67,7 +67,9 @@ li a{
     margin: 10px;
     width: 200px;
     height: 200px;
-
+    border-bottom-color: #407dd7;
+    border-right-color: #10558d;
+    border-style:solid;
 }
 
 .wrapper .sidebar .profile h3{
@@ -80,7 +82,6 @@ li a{
     color: #407dd7;
     width: 30px;
     display: inline-block;
-    justify-content: center;
 }
 a{
     color: #407dd7;

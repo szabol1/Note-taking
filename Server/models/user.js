@@ -19,13 +19,20 @@ const users = [
 function getUsers(){
     return users;
 }
-function login(user){//object literal with username from form and password that was entered
-    let cUser = users.filter(u=>u.username==user.username);
+async function findUser(userName){
+    let sql = 'SELECT * FROM USERS WHERE USERNAME = ${userName}';
+    let user = await con.query(sql);
+    return user;
+}
+
+async function login(user){//object literal with username from form and password that was entered
+    let cUser = await findUser(user.userName) ;
     if(!cUser[0]) throw Error("Username not found");
     if(!cUser[0].password !== user.password) throw Error("wrong password");
 
+    return cUser[0];
 
 }
 module.exports = {
-    getUsers
+    getUsers, login
 }

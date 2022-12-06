@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require(`express`);
 const app = express();
 const userRoutes = require("./Server/routes/user");//connects to
+const noteRoutes = require("./Server/routes/notes");
 const {json} = require("express");
 
 app.use(function(req, res, next){
@@ -11,6 +13,7 @@ app.use(function(req, res, next){
 })
 app.use(express,json());
 app.use("/user", userRoutes);
+app.use("/notes", noteRoutes)
 
 const PORT = process.env.PORT || 3000;//sets port
 

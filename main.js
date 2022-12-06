@@ -17,15 +17,8 @@ async function fetchData(route = '', data = {}, methodType) {
         throw await response.json();
     }
 }
-fetchData("/user/login", user, "POST")
-    .then((data) => {
-        console.log(data);
-        window.location.href = "login.html";
-    })
-    .catch((err) => {
-        console.log(`Error!!! ${err.message}`)
-    })
-class user{
+
+class users{
     constructor(id, fName, lName, uName, password){
         this.userId = id;
         this.firstName = fName;
@@ -65,6 +58,14 @@ class user{
     }
 
 }
+fetchData("/user/login", users, "POST")
+    .then((data) => {
+        console.log(data);
+        window.location.href = "login.html";
+    })
+    .catch((err) => {
+        console.log(`Error!!! ${err.message}`)
+    })
 function fetchData(){
 
 }
@@ -78,10 +79,10 @@ function addUser(e){
 
     const first = document.getElementById("name").value;
     const last = document.getElementById("last").value;
-    const usern = document.getElementById("user").value;
-    const password = document.getElementById("pass").value;
+    const usern = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    const newUser = new User(1, first, last, usern, password);
+    const newUser = new users( first, last, usern, password);
     console.log(newUser.getUserId() + ", " + newUser.getFirstName()+ ", " + newUser.getLastName() + ", " + newUser.getUserName() + ", " + newUser.getPassword());
 
 }
@@ -94,14 +95,14 @@ function login(e){
     const first = document.getElementById("Username").value;
     const second = document.getElementById("Password").value;
     //check if(user and password == anything in database?) cant create second constructor for just log in..not sure what to do here since we dont have values assigned to userIDs yet
-    let user = new User(1,"firstName", "LastName", first, second);
-    console.log(user.getUserName() + "was logged in");
+    let cUser = new user(1,"firstName", "LastName", first, second);
+    console.log(cUser.getUserName() + "was logged in");
 
 }
 class notes{
-    constructor(noteId,User, postDate, contents){
+    constructor(noteId,user, postDate, contents){
         this.noteId = noteId;
-        this.userId = User;
+        this.userId = user;
         this.postDate = postDate;
         this.contents = contents;
     }

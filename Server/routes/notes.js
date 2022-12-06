@@ -1,5 +1,6 @@
 const express = require(`express`);
 const notes = require("../models/notes");
+const User = require("../models/user");
 
 //lets you use any funciton exported in that models file
 const router = express.Router();
@@ -18,6 +19,22 @@ router
             res.send(Notes);
         }catch(err){
             res.status(401).send({message})
+        }
+    })
+    .put('/edit', async(req,res)=>{
+        try{
+            let editNote = await notes.editNote(req.body);
+            res.send({editNote, password:undefined});
+        }catch(err){
+            res.status(401).send({message: err.message})
+        }
+    })
+    .delete('/delete', async(req, res)=>{
+        try{
+            let deletednote = await notes.deleteNote(req.body);
+            res.send({success: "Goodbye!"})
+        } catch(err){
+            res.status(401).send({message: err.message})
         }
     })
 module.exports = router;

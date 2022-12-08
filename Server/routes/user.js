@@ -20,7 +20,7 @@ router
             res.status(401).send({message: err.message})
         }
     })
-    .post('/user/register', async(req, res)=>{
+    .post('/user/register', async(req, res)=>{//could it be route path?? what else should it be
         try{
             console.log(req.body)
             let newUser = await User.register(req.body);

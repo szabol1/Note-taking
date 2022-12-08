@@ -93,11 +93,11 @@ function login(e){
     //check if(user and password == anything in database?) cant create second constructor for just log in..not sure what to do here since we dont have values assigned to userIDs yet
     let cUser = new users(first, second);
     console.log(cUser);
-    fetchData("/user/log", users, "POST")//getting an error for log in
+    fetchData("/user/login", users, "POST")//getting an error for log in
         .then((data) => {
             setCurrentUser(data);
             console.log(data);
-            window.location.href = "login.html";
+            window.location.href = "note.html";
         })
         .catch((err) => {
             console.log(`Error!!! ${err.message}`)
@@ -121,7 +121,7 @@ function register(e){//not working not even printing user anymore for some reaso
     fetchData("/user/register", nuser, "POST")//having issues not working for me
         .then((data)=>{
             setCurrentUser(data);
-            window.location.href="notes.html";
+            window.location.href="note.html";
             console.log(data);
         })
         .catch((err)=>{

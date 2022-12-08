@@ -4,7 +4,7 @@ const User = require("../models/user");
 //lets you use any funciton exported in that models file
 const router = express.Router();
 router
-    .get('/user/getUsers', async(req, res)=> {
+    .get('/getUsers', async(req, res)=> {
         try {
             const users =await User.getAllUsers();
             res.send(users);
@@ -12,7 +12,7 @@ router
             res.status(401).send({message: err.message});
         }
     })
-    .post('/user/login', async(req,res)=>{
+    .post('/login', async(req,res)=>{
         try{
             let users = await User.login(req.body);
             res.send({...users, password: undefined})
@@ -20,7 +20,7 @@ router
             res.status(401).send({message: err.message})
         }
     })
-    .post('/user/register', async(req, res)=>{//could it be route path?? what else should it be
+    .post('/register', async(req, res)=>{//could it be route path?? what else should it be
         try{
             console.log(req.body)
             let newUser = await User.register(req.body);
@@ -29,7 +29,7 @@ router
             res.status(401).send({message: err.message});
         }
     })
-    .put('/user/edit', async(req,res)=>{
+    .put('/edit', async(req,res)=>{
         try{
             let editUser = await User.editUser(req.body);
             res.send({editUser, password:undefined});
@@ -37,7 +37,7 @@ router
             res.status(401).send({message: err.message})
         }
     })
-    .delete('/user/delete', async(req, res)=>{
+    .delete('/delete', async(req, res)=>{
         try{
             let deletedUser = await User.deleteUser(req.body);
             res.send({success: "Goodbye!"})

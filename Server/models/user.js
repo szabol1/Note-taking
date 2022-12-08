@@ -48,20 +48,20 @@ async function findUser(user) {
     if (user.userId) {
         sql = `
       SELECT * FROM users
-       WHERE userID = ${user.userId}
+       WHERE userId = ${user.userId}
     `
     } else sql = `
     SELECT * FROM users 
-      WHERE userName = "${user.username}"
+      WHERE username = "${user.username}"
   `;
 
     return await con.query(sql);
 }
 
 async function login(user){//object literal with username from form and password that was entered
-    let cUser = await findUser(user.username) ;
+    let cUser = await findUser(user) ;
     if(!cUser[0]) throw Error("Username not found");
-    if(!cUser[0].password !== user.password) throw Error("wrong password");
+    if(cUser[0].password !== user.password) throw Error("wrong password");
 
     return cUser[0];
 
@@ -71,7 +71,7 @@ async function register(user){
     let userExists = await findUser(user.username);
     if(userExists.length>0) throw Error("Username already exists");
 
-    let sql = `INSERT INTO users(username, password, first, last) 
+    let sql = `INSERT INTO users(username, password, firstName, lastName) 
                VALUES("${user.username}", "${user.password}","${user.firstName}", "${user.lastName}")`;
     await con.query(sql);
     return await login(user);

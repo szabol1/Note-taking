@@ -2,11 +2,11 @@ const con = require("./sqlConnect");
 
 async function createTable() {
     let sql=`CREATE TABLE IF NOT EXISTS users (
-    userID INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    userID INT NOT NULL AUTO_INCREMENT,
     CONSTRAINT userPK PRIMARY KEY(userID)
   ); `
     await con.query(sql);
@@ -69,10 +69,12 @@ async function login(user){//object literal with username from form and password
 
 async function register(user){
     let userExists = await findUser(user.username);
-    if(userExists[0]) throw Error("Username already exists");
-    let sql = `INSERT INTO user(username, password, first, last) 
-               VALUES(${user.userId}, "${user.firstName}", "${user.lastName}, ${user.username}", "${user.password}")`;
-    return await con.query(sql);
+    if(userExists.length>0) throw Error("Username already exists");
+
+    let sql = `INSERT INTO users(username, password, first, last) 
+               VALUES("${user.username}", "${user.password}","${user.firstName}", "${user.lastName}")`;
+    await con.query(sql);
+    return await login(user);
 }
 
 module.exports = {

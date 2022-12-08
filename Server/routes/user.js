@@ -4,7 +4,7 @@ const User = require("../models/user");
 //lets you use any funciton exported in that models file
 const router = express.Router();
 router
-    .get('/', async(req, res)=> {
+    .get('/user/getUsers', async(req, res)=> {
         try {
             const users =await User.getAllUsers();
             res.send(users);
@@ -12,23 +12,24 @@ router
             res.status(401).send({message: err.message});
         }
     })
-    .post('/login', async(req,res)=>{
+    .post('/user/login', async(req,res)=>{
         try{
-            let user = await User.login(req.body);
-            res.send({...user, password: undefined})
+            let users = await User.login(req.body);
+            res.send({...users, password: undefined})
         }catch(err){
             res.status(401).send({message: err.message})
         }
     })
-    .post('/register', async(req, res)=>{
+    .post('/user/register', async(req, res)=>{
         try{
+            console.log(req.body)
             let newUser = await User.register(req.body);
             res.send({...newUser, password: undefined})
         } catch(err){
             res.status(401).send({message: err.message});
         }
     })
-    .put('/edit', async(req,res)=>{
+    .put('/user/edit', async(req,res)=>{
         try{
             let editUser = await User.editUser(req.body);
             res.send({editUser, password:undefined});
@@ -36,7 +37,7 @@ router
             res.status(401).send({message: err.message})
         }
     })
-    .delete('/delete', async(req, res)=>{
+    .delete('/user/delete', async(req, res)=>{
         try{
             let deletedUser = await User.deleteUser(req.body);
             res.send({success: "Goodbye!"})

@@ -18,7 +18,7 @@ router
             const Notes = await notes.createNote(req.body);
             res.send(Notes);
         }catch(err){
-            res.status(401).send({message})
+            res.status(401).send({message: err.message})
         }
     })
     .put('/edit', async(req,res)=>{

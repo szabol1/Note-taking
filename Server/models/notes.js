@@ -25,14 +25,13 @@ async function deleteNote(note){
                WHERE noteId = ${note.noteId}`;
     await con.query(sql);
 }
-async function getContents(note){
-    let sql = `SELECT * FROM notes(noteContents) 
-               WHERE noteId = ${note.noteId}`;
+async function getContents(){
+    let sql = `SELECT * FROM notes(noteContents)`;
     return con.query(sql);
 }
 async function createNote(note){
     let sql = `INSERT INTO notes(noteID, userID, postDate, noteContents) 
-               WHERE userId = ${note.noteId}
+               WHERE userId = ${note.userId}
                VALUES(${note.noteId}, ${note.userId}, ${note.postDate}, "${note.contents}")`;
     return con.query(sql);
 }

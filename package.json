@@ -7,7 +7,7 @@
   "name": "notetaking",
   "version": "1.0.0",
   "description": "a web app to take notes",
-  "main": "main.js",
+  "main": "public/main.js",
   "devDependencies": {
     "nodemon": "^2.0.20"
   },

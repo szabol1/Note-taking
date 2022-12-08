@@ -19,12 +19,12 @@ async function fetchData(route = '', data = {}, methodType) {
 }
 
 class users{
-    constructor(id, fName, lName, uName, password){
-        this.userId = id;
-        this.firstName = fName;
-        this.lastName = lName;
+    constructor(uName, password, fName, lName, id ){//IMPORTANT--the order was switched here to have username and pass in beginning and ID at the end so you need to update order for functions where you created a new user
         this.username =uName;
         this.password = password;
+        this.firstName = fName;
+        this.lastName = lName;
+        this.userId = id;
     }
     getFirstName(){
         return `${this.firstName}`;
@@ -58,21 +58,8 @@ class users{
     }
 
 }
-fetchData("/user/login", users, "POST")
-    .then((data) => {
-        console.log(data);
-        window.location.href = "login.html";
-    })
-    .catch((err) => {
-        console.log(`Error!!! ${err.message}`)
-    })
-function fetchData(){
 
-}
 
-let register = document.getElementById("registerForm");
-
-if(register) register.addEventListener('submit', addUser);
 
 function addUser(e){
     e.preventDefault();
@@ -82,9 +69,18 @@ function addUser(e){
     const usern = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const newUser = new users( first, last, usern, password);
+    const newUser = new users( usern, password, first, last);
     console.log(newUser.getUserId() + ", " + newUser.getFirstName()+ ", " + newUser.getLastName() + ", " + newUser.getUserName() + ", " + newUser.getPassword());
 
+}
+
+function setCurrentUser(user){//sets current user/logs them in
+    localStorage.setItem('users', JSON.stringify(user));
+
+}
+
+function getCurrentUser(){
+    return localStorage.getItem(JSON.parse("users"))
 }
 
 let log = document.getElementById("loginForm");
@@ -95,12 +91,46 @@ function login(e){
     const first = document.getElementById("Username").value;
     const second = document.getElementById("Password").value;
     //check if(user and password == anything in database?) cant create second constructor for just log in..not sure what to do here since we dont have values assigned to userIDs yet
-    let cUser = new user(1,"firstName", "LastName", first, second);
-    console.log(cUser.getUserName() + "was logged in");
+    let cUser = new users(first, second);
+    console.log(cUser);
+    fetchData("/user/log", users, "POST")//getting an error for log in
+        .then((data) => {
+            setCurrentUser(data);
+            console.log(data);
+            window.location.href = "login.html";
+        })
+        .catch((err) => {
+            console.log(`Error!!! ${err.message}`)
+        })
+
+}
+let regForm = document.getElementById("registerForm");
+if(regForm) regForm.addEventListener('submit', register);//register function connection
+
+function register(e){//not working not even printing user anymore for some reason
+    e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let firstName = document.getElementById("name").value;
+    let last = document.getElementById("last").value;
+    let nuser = new users(username, password, firstName, last);
+
+    console.log(nuser);
+
+    fetchData("/user/register", nuser, "POST")//having issues not working for me
+        .then((data)=>{
+            setCurrentUser(data);
+            window.location.href="notes.html";
+            console.log(data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 
 }
 class notes{
-    constructor(noteId,user, postDate, contents){
+    constructor(user, postDate, contents, noteId,){
         this.noteId = noteId;
         this.userId = user;
         this.postDate = postDate;
@@ -140,8 +170,9 @@ function newNote(e){//does a user activate this?
     const note = document.getElementById("writing").value;
     let date = new Date();
     let todaysDate = String(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
-    let postID = Math.floor((Math.random()*(100000000-1+1)+1));
-    let nte = new notes(postID, 1, todaysDate, note);
+    let current = getCurrentUser();
+
+    let nte = new notes(current.userId, todaysDate, note);
 
     //again no assignments for userIDs or notes yet so not sure what to put in for those besides maybe Math.random()
 ;    console.log(nte.getNoteId() + " " + nte.getUserId(), " " + nte.getPostDate() + " " + nte.getContents());

@@ -93,7 +93,7 @@ function login(e){
     //check if(user and password == anything in database?) cant create second constructor for just log in..not sure what to do here since we dont have values assigned to userIDs yet
     let cUser = new users(first, second);
     console.log(cUser);
-    fetchData("/user/login", cUsers, "POST")//getting an error for log in
+    fetchData("/user/login", cUser, "POST")//getting an error for log in
         .then((data) => {
             setCurrentUser(data);
             console.log(data);

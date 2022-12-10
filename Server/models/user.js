@@ -68,7 +68,7 @@ async function login(user){//object literal with username from form and password
 }
 
 async function register(user){
-    let userExists = await findUser(user.username);
+    let userExists = await findUser(user);
     if(userExists.length>0) throw Error("Username already exists");
 
     let sql = `INSERT INTO users(username, password, firstName, lastName) 

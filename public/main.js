@@ -76,11 +76,17 @@ function addUser(e){
 
 function setCurrentUser(user){//sets current user/logs them in
     localStorage.setItem('users', JSON.stringify(user));
+    console.log(user);
 
 }
 
 function getCurrentUser(){
-    return localStorage.getItem(JSON.parse("users"))
+    return localStorage.getItem(JSON.parse('users'));
+
+}
+
+function removeCurrentUser(){
+
 }
 
 let log = document.getElementById("loginForm");
@@ -130,11 +136,11 @@ function register(e){//not working not even printing user anymore for some reaso
 
 }
 class notes{
-    constructor(user, postDate, contents, noteId,){
-        this.noteId = noteId;
+    constructor(user, postDate,contents, noteId){
         this.userId = user;
-        this.postDate = postDate;
+        this.postDate = postDate
         this.contents = contents;
+        this.noteId = noteId;
     }
     getNoteId(){
         return `${this.noteId}`;
@@ -162,19 +168,38 @@ class notes{
     }
 }
 let noteDoc =document.getElementById("notesForm");
-if(noteDoc) noteDoc.addEventListener("submit", newNote);
+if(noteDoc) noteDoc.addEventListener('submit', newNote);
 
-function newNote(e){//does a user activate this?
+function newNote(e){
     e.preventDefault();
 
     const note = document.getElementById("writing").value;
-    let date = new Date();
-    let todaysDate = String(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
-    let current = getCurrentUser();
+    let current = getCurrentUser();//error here with json.parse??
 
-    let nte = new notes(current.userId, todaysDate, note);
+    let nte = new notes(current.userId, note);
+    fetchData("/notes/note", nte, "POST")
+        .then((data)=>{
+            console.log(data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 
-    //again no assignments for userIDs or notes yet so not sure what to put in for those besides maybe Math.random()
-;    console.log(nte.getNoteId() + " " + nte.getUserId(), " " + nte.getPostDate() + " " + nte.getContents());
+}
+
+let button = document.getElementById("button");
+if(button)  button.addEventListener('click', getAllNotes);
+
+function getAllNotes(e){
+    e.preventDefault();
+    let noteDisplay = document.getElementById("writing");
+    fetchData("/notes/getNotes", notes, "GET")
+        .then((data)=>{
+            let p = document.querySelector('.text');//says p is null
+            p.innerHTML = data;
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 
 }

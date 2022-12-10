@@ -41,7 +41,7 @@ async function deleteNote(note){
     await con.query(sql);
 }
 async function getContents(){//use this to display notes
-    let sql = `SELECT contents FROM notes`;//or notes(contents)
+    let sql = `SELECT contents FROM notes`;
     return con.query(sql);
 }
 async function createNote(note){

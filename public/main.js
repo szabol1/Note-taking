@@ -71,6 +71,8 @@ function getCurrentUser(){
 
 }
 
+let currentUser = getCurrentUser();
+
 function removeCurrentUser(){
 
 }
@@ -133,9 +135,6 @@ class notes{
     getUserId(){
         return `${this.userId}`;
     }
-    getPostDate(){
-        return `${this.postDate}`;
-    }
     setNoteId(id){
         this.noteId = id;
     }
@@ -156,9 +155,9 @@ function newNote(e){
     e.preventDefault();
 
     const note = document.getElementById("writing").value;
-    let current = getCurrentUser();//error here with json.parse??
+    console.log(currentUser.userId);
 
-    let nte = new notes(current.userId, note);
+    let nte = new notes(currentUser.userId, note);
     console.log(nte);
 
     fetchData("/notes/note", nte, "POST")

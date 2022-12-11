@@ -6,8 +6,8 @@ async function createTable() {
     password VARCHAR(255) NOT NULL,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
-    userID INT NOT NULL AUTO_INCREMENT,
-    CONSTRAINT userPK PRIMARY KEY(userID)
+    userId INT NOT NULL AUTO_INCREMENT,
+    CONSTRAINT userPK PRIMARY KEY(userId)
   ); `
     await con.query(sql);
 }
@@ -18,15 +18,15 @@ async function editUser(user){
     if(user.username) {
         sql=`UPDATE users
     SET username = "${user.username}"
-    WHERE userID = ${user.userId}`;
+    WHERE userId = ${user.userId}`;
     } else if(user.firstName){
         sql=`UPDATE users
         SET firstName = "${user.firstName}"
-        WHERE userID =${user.userId}`;
+        WHERE userId =${user.userId}`;
     } else if(user.lastName){
         sql= `UPDATE users
         SET lastName = "${user.lastName}"
-        WHERE userID = ${user.userId}`
+        WHERE userId = ${user.userId}`
     }
     await con.query(sql);
     let updatedUser = await findUser(user);
@@ -34,7 +34,7 @@ async function editUser(user){
 }
 async function deleteUser(user){
     let sql = `DELETE FROM users
-        WHERE userID = ${user.userId}`;
+        WHERE userId = ${user.userId}`;
     await con.query(sql);
 }
 async function getAllUsers(){
@@ -48,7 +48,7 @@ async function findUser(user) {
     if (user.userId) {
         sql = `
       SELECT * FROM users
-       WHERE userID = ${user.userId}
+       WHERE userId = ${user.userId}
     `
     } else sql = `
     SELECT * FROM users 

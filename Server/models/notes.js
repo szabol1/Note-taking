@@ -6,7 +6,7 @@ async function createTable() {//if post date is an issue due to 10/10/10 format 
     contents VARCHAR(255),
     noteId INT NOT NULL AUTO_INCREMENT,
     CONSTRAINT notesPK PRIMARY KEY(noteId),
-    CONSTRAINT notesFK FOREIGN KEY(userId) references users(userID)
+    CONSTRAINT notesFK FOREIGN KEY(userId) references users(userId) 
   ); `
     await con.query(sql);
 }
@@ -42,11 +42,11 @@ async function getContents(){//use this to display notes
     let sql = `SELECT contents FROM notes`;
     return con.query(sql);
 }
-async function createNote(note){
-    console.log(note);
+async function createNote(note){//should i check the user id to add to correct table?? not sure how
+
     let sql = `INSERT INTO notes(userId, contents) 
                VALUES(${note.userId}, "${note.contents}")
-               WHERE notes.userId = ${note.userId}
+               
                `;
     return con.query(sql);
 }

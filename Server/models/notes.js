@@ -5,8 +5,8 @@ async function createTable() {//if post date is an issue due to 10/10/10 format 
     userId INT NOT NULL,
     contents VARCHAR(255),
     noteId INT NOT NULL AUTO_INCREMENT,
-    CONSTRAINT usersPK PRIMARY KEY(noteId),
-    CONSTRAINT notesFK FOREIGN KEY(noteId) references users(userId)
+    CONSTRAINT notesPK PRIMARY KEY(noteId),
+    CONSTRAINT notesFK FOREIGN KEY(userId) references users(userID)
   ); `
     await con.query(sql);
 }
@@ -14,10 +14,10 @@ createTable();
 
 async function findUser(user) {
     let sql;
-    if (user.userId) {
+    if (user.userID) {
         sql = `
       SELECT * FROM users
-       WHERE userId = ${user.userId}
+       WHERE userId = ${user.userID}
     `
     } else sql = `
     SELECT * FROM users 
@@ -31,9 +31,7 @@ async function editNote(note){//not sure what to use to find this as the paramet
     let sql = `UPDATE notes
                 SET contents = "${note.contents}"
                 WHERE noteId = ${note.noteId}`;
-    await con.query(sql);
-    let updatedNote = await getContents(note);
-    return updatedNote;
+   return await con.query(sql);
 }
 async function deleteNote(note){
     let sql = `DELETE FROM notes
@@ -45,10 +43,11 @@ async function getContents(){//use this to display notes
     return con.query(sql);
 }
 async function createNote(note){
-
-    let sql = `INSERT INTO notes(userId, contents, noteId) 
-               WHERE note.userId = ${note.userId}
-               VALUES(${note.userId}, "${note.contents}", ${note.noteId})`;
+    console.log(note);
+    let sql = `INSERT INTO notes(userId, contents) 
+               VALUES(${note.userId}, "${note.contents}")
+               WHERE notes.userId = ${note.userId}
+               `;
     return con.query(sql);
 }
 

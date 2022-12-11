@@ -18,15 +18,15 @@ async function editUser(user){
     if(user.username) {
         sql=`UPDATE users
     SET username = "${user.username}"
-    WHERE userId = ${user.userId}`;
+    WHERE userID = ${user.userId}`;
     } else if(user.firstName){
         sql=`UPDATE users
         SET firstName = "${user.firstName}"
-        WHERE userId =${user.userId}`;
+        WHERE userID =${user.userId}`;
     } else if(user.lastName){
         sql= `UPDATE users
         SET lastName = "${user.lastName}"
-        WHERE userId = ${user.userId}`
+        WHERE userID = ${user.userId}`
     }
     await con.query(sql);
     let updatedUser = await findUser(user);
@@ -34,7 +34,7 @@ async function editUser(user){
 }
 async function deleteUser(user){
     let sql = `DELETE FROM users
-        WHERE userId = ${user.userId}`;
+        WHERE userID = ${user.userId}`;
     await con.query(sql);
 }
 async function getAllUsers(){
@@ -48,7 +48,7 @@ async function findUser(user) {
     if (user.userId) {
         sql = `
       SELECT * FROM users
-       WHERE userId = ${user.userId}
+       WHERE userID = ${user.userId}
     `
     } else sql = `
     SELECT * FROM users 

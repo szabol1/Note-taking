@@ -60,20 +60,6 @@ class users{
 }
 
 
-
-function addUser(e){
-    e.preventDefault();
-
-    const first = document.getElementById("name").value;
-    const last = document.getElementById("last").value;
-    const usern = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    const newUser = new users( usern, password, first, last);
-    console.log(newUser.getUserId() + ", " + newUser.getFirstName()+ ", " + newUser.getLastName() + ", " + newUser.getUserName() + ", " + newUser.getPassword());
-
-}
-
 function setCurrentUser(user){//sets current user/logs them in
     localStorage.setItem('users', JSON.stringify(user));
     console.log(user);
@@ -81,7 +67,7 @@ function setCurrentUser(user){//sets current user/logs them in
 }
 
 function getCurrentUser(){
-    return localStorage.getItem(JSON.parse('users'));
+    return JSON.parse(localStorage.getItem('users'));
 
 }
 
@@ -136,9 +122,8 @@ function register(e){//not working not even printing user anymore for some reaso
 
 }
 class notes{
-    constructor(user, postDate,contents, noteId){
+    constructor(user,contents, noteId){
         this.userId = user;
-        this.postDate = postDate
         this.contents = contents;
         this.noteId = noteId;
     }
@@ -157,9 +142,6 @@ class notes{
     setUserId(id){
         this.userId=id;
     }
-    setPostDate(date){
-        this.postDate=date;
-    }
     setContents(notes){
         this.contents = notes;
     }
@@ -177,6 +159,8 @@ function newNote(e){
     let current = getCurrentUser();//error here with json.parse??
 
     let nte = new notes(current.userId, note);
+    console.log(nte);
+
     fetchData("/notes/note", nte, "POST")
         .then((data)=>{
             console.log(data);

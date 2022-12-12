@@ -5,9 +5,9 @@ const User = require("../models/user");
 //lets you use any funciton exported in that models file
 const router = express.Router();
 router
-    .get(`/getNotes`, async(req, res)=> {//use this to display notes
+    .post(`/getNotes`, async(req, res)=> {//use this to display notes
         try {
-            const Notes = await notes.getContents();
+            const Notes = await notes.getContents(req.body);
             res.send(Notes);
         } catch(err){
             res.status(401).send({message: err.message});

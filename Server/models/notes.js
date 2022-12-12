@@ -38,8 +38,10 @@ async function deleteNote(note){
                WHERE noteId = ${note.noteId}`;
     await con.query(sql);
 }
-async function getContents(){//use this to display notes
-    let sql = `SELECT contents FROM notes`;
+async function getContents(note){//use this to display notes
+    console.log(note)
+    let sql = `SELECT * FROM notes
+               WHERE userId = ${note.userId}`;
     return con.query(sql);
 }
 async function createNote(note){//should i check the user id to add to correct table?? not sure how

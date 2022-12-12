@@ -155,9 +155,10 @@ function newNote(e){
     e.preventDefault();
 
     const note = document.getElementById("writing").value;
-    console.log(currentUser.userId);
+    let current =  getCurrentUser();//error here undefined
+    console.log(current.userId);//user id is undefined
 
-    let nte = new notes(currentUser.userId, note);
+    let nte = new notes(current.userId, note);
     console.log(nte);
 
     fetchData("/notes/note", nte, "POST")
@@ -175,11 +176,22 @@ if(button)  button.addEventListener('click', getAllNotes);
 
 function getAllNotes(e){
     e.preventDefault();
-    let noteDisplay = document.getElementById("writing");
-    fetchData("/notes/getNotes", notes, "GET")
+
+    let noteDisplay = document.getElementById("writing");//this is my text area
+
+    let nte = new notes(currentUser.userId,null);
+    console.log(nte);
+    let p = document.querySelector('#writing');//says p is null
+
+    fetchData("/notes/getNotes", nte, "POST")
         .then((data)=>{
-            let p = document.querySelector('.text');//says p is null
-            p.innerHTML = data;
+            data.forEach((notes)=>{
+                let p = document.createElement('p');
+                p.class = "error";
+                p.innerText+=notes.contents;
+                console.log(notes.contents);
+                p.innerText+=notes.contents;
+            })
         })
         .catch((err)=>{
             console.log(err);

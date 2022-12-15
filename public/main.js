@@ -186,11 +186,12 @@ function getAllNotes(e){
     fetchData("/notes/getNotes", nte, "POST")
         .then((data)=>{
             data.forEach((notes)=>{
-                let p = document.createElement('p');
-                p.class = "error";
-                p.innerText+=notes.contents;
+                let p = document.getElementById('p');
+                p.innerHTML+=notes.contents;
+                p.innerHTML+=("<br>");
                 console.log(notes.contents);
-                p.innerText+=notes.contents;
+                console.log("\n");
+
             })
         })
         .catch((err)=>{

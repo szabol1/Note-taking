@@ -164,6 +164,7 @@ function newNote(e){
     fetchData("/notes/note", nte, "POST")
         .then((data)=>{
             console.log(data);
+            document.location.reload();
         })
         .catch((err)=>{
             console.log(err);
